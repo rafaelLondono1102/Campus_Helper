@@ -39,8 +39,17 @@ class UserSeeder extends Seeder
                 'name'=> 'Lola',
                 'lastname'=>'Lolita',
                 'email'=>'lola@correo.com',
-                'password'=> Hash::make('lola123'),
+                'password'=> Hash::make('hola123'),
                 'type'=>'student',
+                'created_at'=>Carbon::now(),
+                'updated_at'=>Carbon::now()
+            ],
+            [
+                'name'=> 'Pepito',
+                'lastname'=>'perez',
+                'email'=>'pepe@correo.com',
+                'password'=> Hash::make('hola123'),
+                'type'=>'worker',
                 'created_at'=>Carbon::now(),
                 'updated_at'=>Carbon::now()
             ],

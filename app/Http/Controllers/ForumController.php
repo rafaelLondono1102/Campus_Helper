@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Forum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ForumController extends Controller
 {
@@ -24,7 +26,14 @@ class ForumController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para crear foros');
+
+            return redirect(route('home'));
+
+        }
+        return view('forums.create');
     }
 
     /**
@@ -35,7 +44,30 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para crear foros');
+
+            return redirect(route('home'));
+
+        }
+        
+        $input = $request->all();
+      
+        
+        $forum=new Forum();
+        $forum->fill($input);
+        $forum->user_id=Auth::id();
+        
+        $forum->save();
+        
+
+        
+
+        Session::flash('success','Foro creado exitosamente');
+
+        return redirect(route('home'))
+        ->with('flash','Foro creado exitosamente');
     }
 
     /**

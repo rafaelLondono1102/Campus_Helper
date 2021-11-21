@@ -6,6 +6,7 @@ use App\Models\Forum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreForumRequest;
 
 class ForumController extends Controller
 {
@@ -16,7 +17,10 @@ class ForumController extends Controller
      */
     public function index()
     {
-        //
+        $forums= Forum::orderBy('id','asc')->get();
+        
+
+        return view('forums.index',compact('forums'));
     }
 
     /**
@@ -42,7 +46,7 @@ class ForumController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreForumRequest $request)
     {
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
         {
@@ -78,7 +82,7 @@ class ForumController extends Controller
      */
     public function show(Forum $forum)
     {
-        //
+        return view('forums.show', compact('forum'));
     }
 
     /**
@@ -112,6 +116,9 @@ class ForumController extends Controller
      */
     public function destroy(Forum $forum)
     {
-        //
+        $forum->delete();
+        Session::flash('success','Foro removido exitosamente');
+
+        return redirect(route('home'));
     }
 }

@@ -8,9 +8,10 @@
             
                 <h3 >
                     <small class="text-muted ">Foro</small>
-                    <p class="text-center">
+                    <h6 class="text-muted">{{ $forum ->user->name}} {{ $forum ->user->lastname}}</h6>
+                    <h2 class="text-center">
                         {{$forum->question}}
-                    </p>
+                    </h2>
                 </h3>
                 
                 <div class="btn-group mt-3" role="group" aria-label="Basic mixed styles example"> 

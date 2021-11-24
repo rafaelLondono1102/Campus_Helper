@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Landmark;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreLandmarkRequest;
 
 class LandmarkController extends Controller
 {
@@ -14,7 +17,8 @@ class LandmarkController extends Controller
      */
     public function index()
     {
-        //
+        $landmarks= Landmark::orderBy('name','asc')->get();
+        return view('landmarks.index',compact('landmarks'));
     }
 
     /**
@@ -24,7 +28,15 @@ class LandmarkController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::user()->type != 'student')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para crear restaurantes');
+
+            return redirect(route('home'));
+
+        }
+        
+        return view('landmarks.create');
     }
 
     /**
@@ -33,9 +45,40 @@ class LandmarkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLandmarkRequest $request)
     {
-        //
+        if(Auth::user()->type != 'student')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para crear restaurantes');
+
+            return redirect(route('home'));
+
+        }
+        
+        $input = $request->all();
+      
+        $landmark=new Landmark();
+        $landmark->fill($input);
+        
+        //guardamos el archivo/logo para poder recuperarlo y mostrarlo
+        if($request->hasFile('picture')){
+            $file=$request->file('picture');
+            $extension=$file->getClientOriginalExtension();
+            $filename=time().'.'.$extension;
+            $file->move('images',$filename);
+            $landmark->picture=$filename;
+        }
+        else{
+            $filename='landmark.png';
+            $landmark->picture=$filename;
+        }
+        
+        $landmark->save();
+
+        Session::flash('success','Restaurante creado exitosamente');
+
+        return redirect(route('home'))
+        ->with('flash','Restaurante creado exitosamente');
     }
 
     /**
@@ -46,7 +89,8 @@ class LandmarkController extends Controller
      */
     public function show(Landmark $landmark)
     {
-        //
+        
+        return view('landmarks.show', compact('landmark'));
     }
 
     /**

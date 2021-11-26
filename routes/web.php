@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ReportController;
 
 /*
@@ -32,4 +33,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('reports', ReportController::class);
     Route::get('/report/{forums}', [App\Http\Controllers\ReportController::class, 'createCaseForum'])->name('reports.createcaseforum');
     Route::get('/report/{answer}', [App\Http\Controllers\ReportController::class, 'createCaseAnswer'])->name('reports.createcaseasnwer');
+    Route::resource('answer', AnswerController::class);
 });

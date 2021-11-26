@@ -82,7 +82,8 @@ class ForumController extends Controller
      */
     public function show(Forum $forum)
     {
-        return view('forums.show', compact('forum'));
+        $answers = $forum->answer()->get();
+        return view('forums.show', compact('answers','forum'));
     }
 
     /**

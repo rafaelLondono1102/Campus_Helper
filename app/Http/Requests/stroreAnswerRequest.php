@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreForumRequest extends FormRequest
+class stroreAnswerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class StoreForumRequest extends FormRequest
     public function rules()
     {
         return [
-            'question'=>'required | string | min:5 | max:255',
-            'user_id'=>'exists:users,id',
+            'answer' => 'required|min:5'
         ];
     }
 }

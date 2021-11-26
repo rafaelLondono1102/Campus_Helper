@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('forum_id');
-            $table->text('comment');
+            $table->text('answer');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

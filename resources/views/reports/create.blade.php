@@ -18,13 +18,14 @@
             <div class="mb">
                 {{Form::label('description', 'Descripción',['class'=>'form-label'])}} 
                 {{ Form::textarea('description',null,['class'=>'form-control','rows'=>'4'])}}
-                {{--
-                    
-                    <input type="hidden" name="answer_id" value={{$answer->id}}>
-                --}}
-
-                
-                <input type="hidden" name="forum_id" value= {{$forum->id}}>
+                @php
+                    if (isset($answer_id)){
+                        echo '<input type="hidden" name="answer_id" value='.$answer_id.'>';
+                    }
+                    else{
+                        echo '<input type="hidden" name="forum_id" value='.$forum_id.'>';
+                    }
+                @endphp
                 
             </div>
             

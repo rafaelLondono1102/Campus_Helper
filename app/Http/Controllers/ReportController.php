@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Forum;
+use App\Models\Answer;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +26,19 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Forum $forum)
+    public function create($forum_id)
     {
-        
-        return view('reports.create',compact('forum'));
+        return view('reports.create',compact('forum_id'));
+    }
+
+    public function createCaseForum($forum_id)
+    {
+        return view('reports.create',compact('forum_id'));
+    }
+
+    public function createcaseAnswer(Answer $answer_id)
+    {
+        return view('reports.create',compact('answer_id'));
     }
 
     /**
@@ -56,8 +66,6 @@ class ReportController extends Controller
         $report->user_id=Auth::id();
         $report->forum_id=$input['forum_id'];
         //$report->answer_id=$input['answer_id'];
-        
-        dd($request);
         
         //TODO: pasarle el id del foro o del comentario que se quiere reportar
         $report->save();

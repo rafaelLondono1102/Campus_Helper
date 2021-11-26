@@ -23,7 +23,7 @@
 
                         <button type="submit" class="btn btn-danger mt-1" href="{{ route('forums.destroy', $forum->id)}}">Remover</button>
 
-                        <a href="{{ route("reports.create", $forum->id)}}" class="btn btn-warning mt-1"> Reportar </a>
+                        <a href="{{ route("reports.createcaseforum", $forum->id)}}" class="btn btn-warning mt-1"> Reportar </a>
                         
                     {!! Form::close() !!}
 

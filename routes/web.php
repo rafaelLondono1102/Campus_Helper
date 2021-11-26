@@ -30,4 +30,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('forums', ForumController::class);
     Route::resource('reports', ReportController::class);
+    Route::get('/report/{forums}', [App\Http\Controllers\ReportController::class, 'createCaseForum'])->name('reports.createcaseforum');
+    Route::get('/report/{answer}', [App\Http\Controllers\ReportController::class, 'createCaseAnswer'])->name('reports.createcaseasnwer');
 });

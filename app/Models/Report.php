@@ -11,6 +11,8 @@ class Report extends Model
 
     protected $fillable = [
         'description',
+        'forum_id',
+        'answer_id'
     ];
 
     public function user()

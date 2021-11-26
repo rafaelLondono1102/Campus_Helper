@@ -26,20 +26,49 @@
                         <a href="{{ route("reports.create", $forum->id)}}" class="btn btn-warning mt-1"> Reportar </a>
                         
                     {!! Form::close() !!}
-
-                    
-                    
-                    
-
-                    
-
                 </div>
-                
-         
           </div>
-        
-        
-       
-        
+
+          <div class="jumbotron">
+            <h3>Participa de este foro!</h3>
+             {!! Form::open(['route' => ['answer.store'],'method' => 'post']) !!}
+                 <div class="mb-3">
+                     {{ Form::label('answer','Respuesta',['class' => 'form-label']) }}
+                     {{ Form::textArea('answer',null,['class' => 'form-control']) }}
+                     {{ Form::hidden('forum_id', $forum->id) }}
+                 </div>
+                 {{ Form::submit('Crear',['class' => 'btn btn-primary']) }}
+             {!! Form::close() !!}
+        </div>
+
+        @foreach ($answers as $answer)
+            <div class="row mt-3">
+                <div class="col">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2">
+                                <div class="fw-bold">
+                                    <div class="row">
+                                        <b>{{ $answer->user->name}}</b>
+                                    </div>
+                                </div>
+                                {{ $answer->answer }}
+                            </div>
+                            @if (Auth::check())
+                                @if (Auth::user()->type == 'admin')
+                                    {!! Form::open(['route' => ['answer.destroy',$answer->id],'method' => 'delete',
+                                    'onsubmit' => 'return confirm(\'Esta segura que desea remover el restaurante\nEsta accion no se puede deshacer\')']) !!}
+                                        <button type="submit" class="btn btn-danger mt-3" onsubmit="">Remover</button>
+                                    {!! Form::close() !!}
+                                @endif
+                            @endif
+                            
+                            
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        @endforeach
+         
     </div>
 @endsection

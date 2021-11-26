@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ReportController;
 
 /*
@@ -30,4 +31,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('forums', ForumController::class);
     Route::resource('reports', ReportController::class);
+    Route::resource('answer', AnswerController::class);
 });

@@ -57,8 +57,11 @@
                             @if (Auth::check())
                                 @if (Auth::user()->type == 'admin')
                                     {!! Form::open(['route' => ['answer.destroy',$answer->id],'method' => 'delete',
-                                    'onsubmit' => 'return confirm(\'Esta segura que desea remover el restaurante\nEsta accion no se puede deshacer\')']) !!}
+                                    'onsubmit' => 'return confirm(\'Esta segura que desea remover la respuesta\nEsta acción no se puede deshacer\')']) !!}
                                         <button type="submit" class="btn btn-danger mt-3" onsubmit="">Remover</button>
+
+                                        <a href="{{ route("report_answer.createcaseAnswer", $answer->id)}}" class="btn btn-warning mt-1"> Reportar </a>
+                                         
                                     {!! Form::close() !!}
                                 @endif
                             @endif

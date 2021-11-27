@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Forum;
-use App\Models\Report;
+use App\Models\Report_answers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class ReportController extends Controller
+class Report_answersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,24 +19,22 @@ class ReportController extends Controller
         //
     }
 
+    public function createcaseAnswer($answer_id)
+    {
+        
+        return view('reports_answers.create',compact('answer_id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
-
-    public function createCaseForum($forum_id)
+    public function create()
     {
-        return view('reports.create',compact('forum_id'));
+        //
     }
 
-   /*  public function createcaseAnswer($answer_id)
-    {
-        
-        return view('reports.create_answer',compact('answer_id'));
-    }
- */
     /**
      * Store a newly created resource in storage.
      *
@@ -57,13 +54,13 @@ class ReportController extends Controller
         $input = $request->all();
       
         
-        $report=new Report();
+        $report=new Report_answers();
         $report->fill($input);
         
         $report->user_id=Auth::id();
         //dd($input);
             
-        $report->forum_id=$input['forum_id'];
+        $report->answer_id=$input['answer_id'];
             
 
         $report->save();
@@ -79,24 +76,46 @@ class ReportController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Report  $report
+     * @param  \App\Models\Report_answers  $report_answers
      * @return \Illuminate\Http\Response
      */
-    public function show(Report $report)
+    public function show(Report_answers $report_answers)
     {
-        
+        //
     }
 
-    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Report_answers  $report_answers
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Report_answers $report_answers)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Report_answers  $report_answers
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Report_answers $report_answers)
+    {
+        //
+    }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Report  $report
+     * @param  \App\Models\Report_answers  $report_answers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Report $report)
+    public function destroy(Report_answers $report_answers)
     {
-        $report->delete();
+        $report_answers->delete();
         Session::flash('success','Reporte eliminado exitosamente');
 
         return redirect(route('home'));

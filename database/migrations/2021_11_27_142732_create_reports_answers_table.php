@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReportsTable extends Migration
+class CreateReportsAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('report_answers', function (Blueprint $table) {
+
             $table->id();
             $table->text('description');
             $table->foreignId('user_id')->nullable();
-            $table->foreignId('forum_id');
+            $table->foreignId('answer_id');
            
             $table->timestamps();
             
@@ -25,7 +26,7 @@ class CreateReportsTable extends Migration
                 ->onUpdate('cascade')
                 ->nullOnDelete();
             
-            $table->foreign('forum_id')->references('id')->on('forums')
+            $table->foreign('answer_id')->references('id')->on('answers')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
                 
@@ -41,6 +42,6 @@ class CreateReportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reports');
+        Schema::dropIfExists('reports_answers');
     }
 }

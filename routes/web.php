@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Report_answersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('forums', ForumController::class);
     Route::resource('reports', ReportController::class);
-    Route::get('/report/{forums}', [App\Http\Controllers\ReportController::class, 'createCaseForum'])->name('reports.createcaseforum');
-    Route::get('/report/{answer}', [App\Http\Controllers\ReportController::class, 'createCaseAnswer'])->name('reports.createcaseasnwer');
+    Route::resource('report_answer', Report_answersController::class);
+    Route::get('/report/forum/{forums}', [App\Http\Controllers\ReportController::class, 'createCaseForum'])->name('reports.createcaseforum');
+    Route::get('/report/answer/{answer}', [App\Http\Controllers\Report_answersController::class, 'createCaseAnswer'])->name('report_answer.createcaseAnswer');
     Route::resource('answer', AnswerController::class);
 });

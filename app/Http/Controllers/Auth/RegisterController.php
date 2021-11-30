@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Controller;
+use App\Mail\RegisterMail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -65,6 +67,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
+        Mail::to($data['email'])->send(new RegisterMail($data['email']));
         return User::create([
             'name' => $data['name'],
             'lastname' => $data['lastname'],

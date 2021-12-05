@@ -5,10 +5,10 @@
         <h1>Foros</h1>
         <br>
 
-
-        <a href="{{ route('forums.create') }}" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
-            title="Crear un foro">Crear</a>
-
+        @if (Auth::check())
+            <a href="{{ route('forums.create') }}" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                title="Crear un foro">Crear</a>
+       @endif 
         <br>
         <br>
 
@@ -26,7 +26,12 @@
                                 <p class="card-text">
                                     {{ $forum->question }}
                                 </p>
-                                <a href="{{ route('forums.show', $forum->id) }}" class="card-link">Ver foro</a>
+                                @if (Auth::check())
+                                    <a href="{{ route('forums.show', $forum->id) }}" class="card-link">Ver foro</a>
+                                @else
+                                    <a href="{{ route('forum.info', $forum->id) }}" class="card-link">Ver foro</a>
+                                @endif
+                                
                             </div>
 
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">

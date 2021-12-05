@@ -26,13 +26,12 @@ Route::get('/', function () {
 Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
-    Route::resource('landmarks', LandmarkController::class);
-});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/info/forums', [App\Http\Controllers\ForumController::class, 'index'])->name('forums.info');
+Route::get('/info/forums/{forums}', [App\Http\Controllers\ForumController::class, 'showInfo'])->name('forum.info');
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -44,4 +43,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report/forum/{forums}', [App\Http\Controllers\ReportController::class, 'createCaseForum'])->name('reports.createcaseforum');
     Route::get('/report/answer/{answer}', [App\Http\Controllers\Report_answersController::class, 'createCaseAnswer'])->name('report_answer.createcaseAnswer');
     Route::resource('answer', AnswerController::class);
+
+    Route::resource('landmarks', LandmarkController::class);
 });

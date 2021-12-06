@@ -75,10 +75,10 @@ class LandmarkController extends Controller
         
         $landmark->save();
 
-        Session::flash('success','Restaurante creado exitosamente');
+        Session::flash('success','Se ha sugerido un sitio de interes nuevo');
 
         return redirect(route('home'))
-        ->with('flash','Restaurante creado exitosamente');
+        ->with('flash','Se ha sugerido un sitio de interes nuevo');
     }
 
     /**
@@ -89,7 +89,6 @@ class LandmarkController extends Controller
      */
     public function show(Landmark $landmark)
     {
-        
         return view('landmarks.show', compact('landmark'));
     }
 

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Forum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreForumRequest;
 
 class ForumController extends Controller
 {
@@ -14,7 +18,10 @@ class ForumController extends Controller
      */
     public function index()
     {
-        //
+        $forums= Forum::orderBy('id','asc')->get();
+        
+
+        return view('forums.index',compact('forums'));
     }
 
     /**
@@ -24,7 +31,14 @@ class ForumController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para crear foros');
+
+            return redirect(route('home'));
+
+        }
+        return view('forums.create');
     }
 
     /**
@@ -33,9 +47,32 @@ class ForumController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreForumRequest $request)
     {
-        //
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para crear foros');
+
+            return redirect(route('home'));
+
+        }
+        
+        $input = $request->all();
+      
+        
+        $forum=new Forum();
+        $forum->fill($input);
+        $forum->user_id=Auth::id();
+        
+        $forum->save();
+        
+
+        
+
+        Session::flash('success','Foro creado exitosamente');
+
+        return redirect(route('forums.index'))
+        ->with('flash','Foro creado exitosamente');
     }
 
     /**
@@ -46,7 +83,8 @@ class ForumController extends Controller
      */
     public function show(Forum $forum)
     {
-        //
+        $answers = $forum->answer()->get();
+        return view('forums.show', compact('answers','forum'));
     }
 
     /**
@@ -80,6 +118,23 @@ class ForumController extends Controller
      */
     public function destroy(Forum $forum)
     {
-        //
+        $forum->delete();
+        Session::flash('success','Foro removido exitosamente');
+
+        return redirect(route('home'));
+    }
+
+    public function showInfo($forum_id)
+    {
+        //dd($forum_id);
+       // $forum= DB::select()
+ 
+
+       $forum= Forum::find($forum_id);
+       //dd($forum);
+
+       $answers = $forum->answer()->get();
+        
+        return view('forums.show_info', compact('answers','forum'));
     }
 }

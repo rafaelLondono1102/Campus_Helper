@@ -34,6 +34,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Answer::class);
     }
 
+    public function forum()
+    {
+        return $this->hasMany(Forum::class);
+    }
+
     //TODO: preguntar si es correcto
     public function user_tags()
     {

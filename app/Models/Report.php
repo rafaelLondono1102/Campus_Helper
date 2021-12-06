@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class Report extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'answer',
-        'forum_id',
+        'description',
+        'forum_id'
     ];
 
     public function user()
@@ -23,4 +23,5 @@ class Answer extends Model
     {
         return $this->belongsTo(Forum::class);
     }
+
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\stroreAnswerRequest;
 
 class AnswerController extends Controller
 {
@@ -33,9 +36,18 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(stroreAnswerRequest $request)
     {
-        //
+        $inputs = $request->all();
+        $comment = new Answer();
+        $comment->fill($inputs);
+        $comment->user_id = Auth::id();
+        $comment->forum_id = $inputs['forum_id'];
+        $comment->save();
+
+        Session::flash('success', 'Respuesta agregada exitosamente');
+
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +92,8 @@ class AnswerController extends Controller
      */
     public function destroy(Answer $answer)
     {
-        //
+        $answer->delete();
+        Session::flash('success', 'Respuesta removida exitosamente');
+        return redirect()->back();
     }
 }

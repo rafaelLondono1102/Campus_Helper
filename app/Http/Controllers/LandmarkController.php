@@ -100,7 +100,12 @@ class LandmarkController extends Controller
      */
     public function edit(Landmark $landmark)
     {
-        //
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para editar sitios de interes');
+            return view('landmarks.show',compact('landmark'));
+        }
+        return view('landmarks.edit',compact('landmark'));
     }
 
     /**
@@ -112,7 +117,19 @@ class LandmarkController extends Controller
      */
     public function update(Request $request, Landmark $landmark)
     {
-        //
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para editar sitios de interes');
+            
+            return view('landmarks.show',compact('landmark'));
+        }
+
+        $input = $request->all();
+        landmark::create($input);
+
+        Session::flash('success','Sitio de interes modificado exitosamente');
+
+        return redirect(route('landmarks.index'));
     }
 
     /**
@@ -123,6 +140,17 @@ class LandmarkController extends Controller
      */
     public function destroy(Landmark $landmark)
     {
-        //
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para eliminar sitios de interes');
+            $landmarks= Landmark::orderBy('name','asc')->get();
+            return view('landmarks.index',compact('landmarks'));
+        }
+
+
+        $landmark->delete();
+        Session::flash('success','Sitio de interes removido exitosamente');
+
+        return redirect(route('home'));
     }
 }

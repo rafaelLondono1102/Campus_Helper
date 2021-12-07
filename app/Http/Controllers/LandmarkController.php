@@ -89,7 +89,8 @@ class LandmarkController extends Controller
      */
     public function show(Landmark $landmark)
     {
-        return view('landmarks.show', compact('landmark'));
+        $events=$landmark->events()->get();
+        return view('landmarks.show', compact('landmark','events'));
     }
 
     /**

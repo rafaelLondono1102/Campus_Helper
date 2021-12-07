@@ -44,8 +44,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report/forum/{forums}', [App\Http\Controllers\ReportController::class, 'createCaseForum'])->name('reports.createcaseforum');
     Route::get('/report/answer/{answer}', [App\Http\Controllers\Report_answersController::class, 'createCaseAnswer'])->name('report_answer.createcaseAnswer');
     Route::resource('answer', AnswerController::class);
-
     Route::resource('landmarks', LandmarkController::class);
-
     Route::resource('event', EventController::class);
 });

@@ -8,7 +8,7 @@
 
             <div class="mb">
 
-                {{Form::label('address', 'Ciudad',['class'=>'form-label'])}} 
+                {{Form::label('address', 'Dirección',['class'=>'form-label'])}} 
                 {{ Form::text('address',null,['class'=>'form-control','maxlength'=>30])}}
             </div>
 

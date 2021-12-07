@@ -28,9 +28,9 @@ class LandmarkController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->type != 'student')
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
         {
-            Session::flash('failure','EL usuario no tiene permisos para crear restaurantes');
+            Session::flash('failure','EL usuario no tiene permisos para crear sitios de interés');
 
             return redirect(route('home'));
 
@@ -47,9 +47,9 @@ class LandmarkController extends Controller
      */
     public function store(StoreLandmarkRequest $request)
     {
-        if(Auth::user()->type != 'student')
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
         {
-            Session::flash('failure','EL usuario no tiene permisos para crear restaurantes');
+            Session::flash('failure','EL usuario no tiene permisos para crear sitios de interés');
 
             return redirect(route('home'));
 

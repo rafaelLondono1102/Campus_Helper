@@ -39,7 +39,11 @@
                     'onsubmit'=> 'return confirm(\'¿Está seguro de que desea remover este punto de interes?\n ¡Esta acción no se puede deshacer!\')']) }}
                     <button type="submit" class="btn btn-danger mt-1" href="{{ route('landmarks.destroy', $landmark->id)}}">Remover</button>
                 {!! Form::close() !!}
+               
+                <a type="button" class="btn btn-primary mt-1" href="{{ route('event.create', $landmark->id)}}">Crear evento en este sitio</a>
             </div>
+
+            
         
         </div>
     </div>

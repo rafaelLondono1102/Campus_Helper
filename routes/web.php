@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\LandmarkController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\LandmarkController;
 use App\Http\Controllers\Report_answersController;
 
 /*
@@ -45,4 +46,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('answer', AnswerController::class);
 
     Route::resource('landmarks', LandmarkController::class);
+
+    Route::resource('event', EventController::class);
 });

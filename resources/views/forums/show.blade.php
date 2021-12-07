@@ -31,7 +31,7 @@
                 </div>
           </div>
 
-          <div class="jumbotron">
+        <div class="jumbotron">
             <h3>Participa de este foro!</h3>
              {!! Form::open(['route' => ['answer.store'],'method' => 'post']) !!}
                  <div class="mb-3">

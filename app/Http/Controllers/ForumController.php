@@ -118,6 +118,12 @@ class ForumController extends Controller
      */
     public function destroy(Forum $forum)
     {
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure','EL usuario no tiene permisos para eliminar foros');
+            $forums= Forum::orderBy('name','asc')->get();
+            return view('forums.index',compact('forums'));
+        }
         $forum->delete();
         Session::flash('success','Foro removido exitosamente');
 

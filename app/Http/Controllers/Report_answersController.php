@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Report_answers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class EventController extends Controller
+class Report_answersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,6 +19,12 @@ class EventController extends Controller
         //
     }
 
+    public function createcaseAnswer($answer_id)
+    {
+        
+        return view('reports_answers.create',compact('answer_id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,14 +32,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
-        {
-            Session::flash('failure','EL usuario no tiene permisos para crear eventos');
-
-            return redirect(route('home'));
-
-        }
-        return view('eventos.create');
+        //
     }
 
     /**
@@ -46,7 +45,7 @@ class EventController extends Controller
     {
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'student')
         {
-            Session::flash('failure','EL usuario no tiene permisos para crear eventos');
+            Session::flash('failure','EL usuario no tiene permisos para crear reportes');
 
             return redirect(route('home'));
 
@@ -55,29 +54,32 @@ class EventController extends Controller
         $input = $request->all();
       
         
-        $event=new Event();
-        $event->fill($input);
+        $report=new Report_answers();
+        $report->fill($input);
         
-        $event->landmark_id = $input['landmark_id'];
-        
-        $event->save();
-        
+        $report->user_id=Auth::id();
+        //dd($input);
+            
+        $report->answer_id=$input['answer_id'];
+            
+
+        $report->save();
 
         
+        
+        Session::flash('success','Reporte creado exitosamente');
 
-        Session::flash('success','Evento creado exitosamente');
-
-        return redirect(route('event.index'))
-        ->with('flash','Evento creado exitosamente');
+        return redirect(route('home'))
+        ->with('flash','Reporte creado exitosamente');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Report_answers  $report_answers
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Report_answers $report_answers)
     {
         //
     }
@@ -85,10 +87,10 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Report_answers  $report_answers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit(Report_answers $report_answers)
     {
         //
     }
@@ -97,10 +99,10 @@ class EventController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Report_answers  $report_answers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, Report_answers $report_answers)
     {
         //
     }
@@ -108,11 +110,14 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Report_answers  $report_answers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Report_answers $report_answers)
     {
-        //
+        $report_answers->delete();
+        Session::flash('success','Reporte eliminado exitosamente');
+
+        return redirect(route('home'));
     }
 }

@@ -15,21 +15,23 @@
                 </h3>
                 
                 <div class="btn-group mt-3" role="group" aria-label="Basic mixed styles example"> 
+                    @if (Auth::check())
+                   {{ Form::open(['route'=> 
+                   ['forums.destroy',$forum->id],
+                   'method'=>'delete',
+                   'onsubmit'=> 'return confirm(\'¿Está seguro de que desea remover el foro?\n ¡Esta acción no se puede deshacer!\')']) }}
+
+                   <button type="submit" class="btn btn-danger mt-1" href="{{ route('forums.destroy', $forum->id)}}">Remover</button>
+
+                   <a href="{{ route("reports.createcaseforum", $forum->id)}}" class="btn btn-warning mt-1"> Reportar </a>
                    
-                    {{ Form::open(['route'=> 
-                        ['forums.destroy',$forum->id],
-                        'method'=>'delete',
-                        'onsubmit'=> 'return confirm(\'¿Está seguro de que desea remover el foro?\n ¡Esta acción no se puede deshacer!\')']) }}
-
-                        <button type="submit" class="btn btn-danger mt-1" href="{{ route('forums.destroy', $forum->id)}}">Remover</button>
-
-                        <a href="{{ route("reports.create", $forum->id)}}" class="btn btn-warning mt-1"> Reportar </a>
-                        
-                    {!! Form::close() !!}
+               {!! Form::close() !!}
+                   @endif
+                    
                 </div>
           </div>
 
-          <div class="jumbotron">
+        <div class="jumbotron">
             <h3>Participa de este foro!</h3>
              {!! Form::open(['route' => ['answer.store'],'method' => 'post']) !!}
                  <div class="mb-3">
@@ -57,8 +59,11 @@
                             @if (Auth::check())
                                 @if (Auth::user()->type == 'admin')
                                     {!! Form::open(['route' => ['answer.destroy',$answer->id],'method' => 'delete',
-                                    'onsubmit' => 'return confirm(\'Esta segura que desea remover el restaurante\nEsta accion no se puede deshacer\')']) !!}
+                                    'onsubmit' => 'return confirm(\'Esta segura que desea remover la respuesta\nEsta acción no se puede deshacer\')']) !!}
                                         <button type="submit" class="btn btn-danger mt-3" onsubmit="">Remover</button>
+
+                                        <a href="{{ route("report_answer.createcaseAnswer", $answer->id)}}" class="btn btn-warning mt-1"> Reportar </a>
+                                         
                                     {!! Form::close() !!}
                                 @endif
                             @endif

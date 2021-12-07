@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Realizar el reporte de una pregunta</h1>
+        <h1>Realizar un reporte de respuesta</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -14,12 +14,12 @@
             </div>
         @endif
         
-        {{ Form::open(['route'=>'reports.store','method'=>'post','files' => 'true']) }}
+        {{ Form::open(['route'=>'report_answer.store','method'=>'post','files' => 'true']) }}
             <div class="mb">
                 {{Form::label('description', 'Descripción',['class'=>'form-label'])}} 
                 {{ Form::textarea('description',null,['class'=>'form-control','rows'=>'4'])}}
                 
-                <input type="hidden" name="forum_id" value='{{$forum_id}}'>
+                <input type="hidden" name="answer_id" value='{{$answer_id}}'>
                     
 
  

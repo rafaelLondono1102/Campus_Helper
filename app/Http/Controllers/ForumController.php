@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Forum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreForumRequest;
@@ -70,7 +71,7 @@ class ForumController extends Controller
 
         Session::flash('success','Foro creado exitosamente');
 
-        return redirect(route('home'))
+        return redirect(route('forums.index'))
         ->with('flash','Foro creado exitosamente');
     }
 
@@ -121,5 +122,19 @@ class ForumController extends Controller
         Session::flash('success','Foro removido exitosamente');
 
         return redirect(route('home'));
+    }
+
+    public function showInfo($forum_id)
+    {
+        //dd($forum_id);
+       // $forum= DB::select()
+ 
+
+       $forum= Forum::find($forum_id);
+       //dd($forum);
+
+       $answers = $forum->answer()->get();
+        
+        return view('forums.show_info', compact('answers','forum'));
     }
 }

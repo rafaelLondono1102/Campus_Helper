@@ -25,12 +25,19 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Forum $forum)
+    
+
+    public function createCaseForum($forum_id)
     {
-        
-        return view('reports.create',compact('forum'));
+        return view('reports.create',compact('forum_id'));
     }
 
+   /*  public function createcaseAnswer($answer_id)
+    {
+        
+        return view('reports.create_answer',compact('answer_id'));
+    }
+ */
     /**
      * Store a newly created resource in storage.
      *
@@ -54,10 +61,15 @@ class ReportController extends Controller
         $report->fill($input);
         
         $report->user_id=Auth::id();
+        //dd($input);
+            
         $report->forum_id=$input['forum_id'];
-        //$report->answer_id=$input['answer_id'];
-        //TODO: pasarle el id del foro o del comentario que se quiere reportar
-        $report->save();    
+            
+
+        $report->save();
+
+        
+        
         Session::flash('success','Reporte creado exitosamente');
         return redirect(route('home'))
         ->with('flash','Reporte creado exitosamente');
@@ -71,7 +83,7 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
-        return view('reports.show', compact('report'));
+        
     }
 
     

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Realizar el reporte de una pregunta</h1>
+        <h1>Crear un nuevo evento</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -14,17 +14,13 @@
             </div>
         @endif
         
-        {{ Form::open(['route'=>'reports.store','method'=>'post','files' => 'true']) }}
-            <div class="mb">
-                {{Form::label('description', 'Descripción',['class'=>'form-label'])}} 
-                {{ Form::textarea('description',null,['class'=>'form-control','rows'=>'4'])}}
-                
-                <input type="hidden" name="forum_id" value='{{$forum_id}}'>
-                    
-
- 
+        {{ Form::open(['route'=>'event.store','method'=>'post','files' => 'true']) }}
             
-            </div>
+            {{ Form::hidden('landmark_id', $landmark->id) }}
+          
+            
+          
+            @include('eventos.form_fields')
             
             <br>
             

@@ -56,16 +56,9 @@ class ReportController extends Controller
         $report->user_id=Auth::id();
         $report->forum_id=$input['forum_id'];
         //$report->answer_id=$input['answer_id'];
-        
-        dd($request);
-        
         //TODO: pasarle el id del foro o del comentario que se quiere reportar
-        $report->save();
-
-        
-        
+        $report->save();    
         Session::flash('success','Reporte creado exitosamente');
-
         return redirect(route('home'))
         ->with('flash','Reporte creado exitosamente');
     }

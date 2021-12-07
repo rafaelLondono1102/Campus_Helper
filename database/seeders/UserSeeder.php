@@ -27,6 +27,15 @@ class UserSeeder extends Seeder
                 'updated_at'=>Carbon::now()
             ],
             [
+                'name'=> 'Hernando',
+                'lastname'=>'Pinzon',
+                'email'=>'hernando.nunezp@autonoma.edu.co',
+                'password'=> Hash::make('12345678'),
+                'type'=>'admin',
+                'created_at'=>Carbon::now(),
+                'updated_at'=>Carbon::now()
+            ],
+            [
                 'name'=> 'Rafael',
                 'lastname'=>'Londoño',
                 'email'=>'rafael.londonob@autonoma.edu.co',

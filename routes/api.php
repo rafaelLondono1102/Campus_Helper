@@ -32,7 +32,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
             'logout'
         ]
     )->name('api.logout');
-    Route::apiResource('v1/answer', AnswerController::class);
+    Route::apiResource('v1/answers', AnswerController::class);
+    Route::apiResource('v1/events', EventController::class);
 });
 
 

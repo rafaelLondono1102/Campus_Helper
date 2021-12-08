@@ -69,7 +69,7 @@ class LandmarkController extends Controller
             $landmark->picture=$filename;
         }
         else{
-            $filename='landmark.png';
+            $filename='landmark.jpg';
             $landmark->picture=$filename;
         }
         
@@ -126,7 +126,19 @@ class LandmarkController extends Controller
         }
 
         $input = $request->all();
-        landmark::create($input);
+        $landmark->fill($input);
+        if($request->hasFile('picture')){
+            $file=$request->file('picture');
+            $extension=$file->getClientOriginalExtension();
+            $filename=time().'.'.$extension;
+            $file->move('images',$filename);
+            $landmark->picture=$filename;
+        }
+        else{
+            $filename='landmark.jpg';
+            $landmark->picture=$filename;
+        }
+        $landmark->save();
 
         Session::flash('success','Sitio de interes modificado exitosamente');
 

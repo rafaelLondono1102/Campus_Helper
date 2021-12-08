@@ -80,14 +80,19 @@
     <div class="container jumbotron" style="background-color: #FFFCFC;">
         <div class="row">
             @foreach ($events as $event)
-            <div class="card border-primary mb-3" style="max-width: 18rem;">
-                <div class="card-header"><h5 class="card-title">{{ $event->name }}</h5></div>
-                <div class="card-body text-primary">
-                  <h5 class="card-title"><p class="card-text">{{ $event->description }}</p></h5>
-                  <p class="card-subtitle mb-2 text-muted">Empieza: {{ $event->start_date }}</a>
-                    <p class="card-subtitle mb-2 text-muted">Termina: {{ $event->end_date }}</a>
+                <div class="card border-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">{{$event->landmark->name }}</h5>
+                    </div>
+                    <div class="card-body text-primary">
+                        <h5 class="card-title">
+                            <p class="card-text">{{ $event->name }}</p>
+                        </h5>
+                        <p class="card-subtitle mb-2 text-muted">{{$event->description}}</p>
+                        <p class="card-subtitle mb-2 text-muted">Empieza: {{ $event->start_date }}</a>
+                        <p class="card-subtitle mb-2 text-muted">Termina: {{ $event->end_date }}</a>
+                    </div>
                 </div>
-              </div>
             @endforeach
         </div>
     </div>

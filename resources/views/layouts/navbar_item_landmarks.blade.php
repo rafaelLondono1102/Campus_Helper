@@ -7,9 +7,12 @@
         <a class="dropdown-item" href="{{ route('landmarks.index') }}">
             Listar
         </a>
-        <a class="dropdown-item" href="{{ route('landmarks.create') }}">
-            Crear
-        </a>
+        
+        @if (Auth::check())
+            <a class="dropdown-item" href="{{ route('landmarks.create') }}">
+                Crear
+            </a>
+        @endif
     </div>
         
     

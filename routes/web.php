@@ -20,24 +20,19 @@ use App\Http\Controllers\Report_answersController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 Auth::routes(['verify' => true]);
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/* Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); */
 
 Route::get('/info/forums', [App\Http\Controllers\ForumController::class, 'index'])->name('forums.info');
 Route::get('/info/forums/{forums}', [App\Http\Controllers\ForumController::class, 'showInfo'])->name('forum.info');
-
-
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('pagina_principal.show');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
-
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('forums', ForumController::class);
     Route::resource('reports', ReportController::class);
     Route::resource('report_answer', Report_answersController::class);

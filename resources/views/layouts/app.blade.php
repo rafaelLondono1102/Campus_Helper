@@ -39,6 +39,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @include('layouts.navbar_item_forums')
+                        @include('layouts.navbar_item_landmarks')
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -52,10 +54,6 @@
                                 </li>
                             @endif
                         @else
-
-                            @include('layouts.navbar_item_forums')
-                            @include('layouts.navbar_item_landmarks')
-
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -75,6 +73,7 @@
                                 </div>
                             </li>
                         @endguest
+                        
                     </ul>
                 </div>
             </div>

@@ -7,8 +7,10 @@
         <a class="dropdown-item" href="{{ route('forums.index') }}">
             Listar
         </a>
-        <a class="dropdown-item" href="{{ route('forums.create') }}">
-            Crear
-        </a>
+        @if (Auth::check())
+            <a class="dropdown-item" href="{{ route('forums.create') }}">
+                Crear
+            </a>
+        @endif
     </div>
  </li>

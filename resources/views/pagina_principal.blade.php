@@ -19,14 +19,14 @@
 
         <div class="row">
             @foreach ($forums as $forum)
-                <div class="card text-dark bg-info mb-8" style="max-width: 19rem;">
+                <div class="card text-dark bg-succes mb-8" style="max-width: 19rem; background-color: #EAF5FF;">
 
                     <div class="card-header">
                         <img src="{{ asset('images/pp11.png') }}" class="img-fluid" alt="..." width="20px">
                         {{ $forum->user->name }}
                     </div>
                     <div class="card-body">
-                        <a class="card-title" class="text-dark"
+                        <a class="card-title"
                             href="{{ route('forums.show', $forum->id) }}">{{ $forum->question }}</a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
     <div class="container jumbotron" style="background-color: #FFFCFC;">
         <div class="row">
             @foreach ($landmarks as $landmark)
-                <div class="card border-info mb-3" style="max-width: 18rem;">
+                <div class="card border-info mb-3" style="max-width: 18rem; ">
                     <img src="{{ asset('images/' . $landmark->picture) }}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ $landmark->name }}</h5>

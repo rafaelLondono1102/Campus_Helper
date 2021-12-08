@@ -2,6 +2,7 @@
 
 @section('content')
     <h1><center>Campus Helper</h1>
+        <i class="fas fa-axe-battle"></i>
     <br>
     <div class="container jumbotron">
         <h1 ><center>Sitios de Interes!</h1>
@@ -47,5 +48,5 @@
             @endforeach
         </div>
     </div>
-    
+
 @endsection

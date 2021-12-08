@@ -76,6 +76,27 @@
 
                 </div>
             </div>
+            
+
+            
+            
+            <div class="btn-group mt-3" role="group" aria-label="Basic mixed styles example"> 
+                @if (Auth::check())
+                  @if (Auth::user()->type == 'admin')
+
+                    <a type="button" class="btn btn-warning mt-1" href="{{ route('landmarks.edit', $landmark->id)}}">Editar</a>
+                    {{ Form::open(['route'=> 
+                        ['landmarks.destroy',$landmark->id],
+                        'method'=>'delete',
+                        'onsubmit'=> 'return confirm(\'¿Está seguro de que desea remover este punto de interes?\n ¡Esta acción no se puede deshacer!\')']) }}
+                        <button type="submit" class="btn btn-danger mt-1" href="{{ route('landmarks.destroy', $landmark->id)}}">Remover</button>
+                    {!! Form::close() !!}
+                  
+                  @endif
+                @endif
+                
+            </div>
+        
         </div>
         <div class="row">
             @foreach ($events as $event)

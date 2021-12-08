@@ -19,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Moul&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -30,7 +31,7 @@
             <div class="container">
                 {{-- Logo --}}
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo-uam.png') }}" class="img-fluid" alt="..." width="95px">
+                    <img src="{{ asset('images/logo-uam.jpeg') }}" class="img-fluid" alt="..." width="95px">
                 </a>
 
                 {{-- *Palabra rara*: cuando se puede ver bien tanto en celulares como en pantallas del pc. --}}
@@ -48,7 +49,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @include('layouts.navbar_item_forums')
-                        
+
                         @include('layouts.navbar_item_landmarks')
                         @guest
                             @if (Route::has('login'))
@@ -72,7 +73,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

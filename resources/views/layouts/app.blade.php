@@ -39,6 +39,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @include('layouts.navbar_item_forums')
+                        @include('layouts.navbar_item_landmarks')
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -52,6 +54,7 @@
                                 </li>
                             @endif
                         @else
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -70,12 +73,31 @@
                                 </div>
                             </li>
                         @endguest
+                        
                     </ul>
                 </div>
             </div>
         </nav>
 
         <main class="py-4">
+            <div class="container">
+                @if (Session::has('success'))
+                
+                    <div class="alert alert-success" role="alert">
+                        {{Session::get('success')}}
+                    </div>
+            
+                @endif
+                @if (Session::has('failure'))
+                
+                    <div class="alert alert-danger" role="alert">
+                        {{Session::get('failure')}}
+                    </div>
+            
+                @endif
+            </div>
+
+
             @yield('content')
         </main>
     </div>

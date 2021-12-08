@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\Forum;
+use App\Models\Landmark;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,10 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+   /*  public function __construct()
     {
         $this->middleware('auth');
-    }
+    } */
 
     /**
      * Show the application dashboard.
@@ -23,6 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $forums= Forum::orderBy('id','asc')->get();
+        $landmarks = Landmark::orderBy('id','asc')->get(); 
+        $events = Event::orderBy('id','asc')->get();
+        return view('pagina_principal',compact('forums','landmarks','events'));
+    }
+
+    public function home(){
+        return view('home'); 
     }
 }

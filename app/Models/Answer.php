@@ -10,7 +10,8 @@ class Answer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'comment',
+        'answer',
+        'forum_id',
     ];
 
     public function user()

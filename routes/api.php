@@ -7,6 +7,7 @@ use App\Http\Controllers\api\v1\ForumController;
 use App\Http\Controllers\api\v1\AnswerController;
 use App\Http\Controllers\api\v1\ReportController;
 use App\Http\Controllers\api\v1\LandmarkController;
+use App\Http\Controllers\api\v1\ReportAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('v1/forums', ForumController::class);
     Route::apiResource('v1/landmarks', LandmarkController::class);
     Route::apiResource('v1/reports', ReportController::class);
+    Route::apiResource('v1/answer_reports', ReportAnswerController::class);
 });
 
 

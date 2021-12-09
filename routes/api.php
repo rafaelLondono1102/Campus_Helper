@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\v1\EventController;
+use App\Http\Controllers\api\v1\ForumController;
 use App\Http\Controllers\api\v1\AnswerController;
 
 /*

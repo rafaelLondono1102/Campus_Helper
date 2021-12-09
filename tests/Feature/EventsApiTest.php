@@ -3,12 +3,21 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EventsApiTest extends TestCase
 {
+
+    //use DatabaseMigrations;
+
+    public function setUp(): void{
+        parent::setUp();
+        $this->artisan('migrate:refresh --path=/database/migrations/2021_11_19_153826_create_events_table.php');
+        $this->artisan('db:seed --class=EventsSeeder');
+    } 
     /**
      * A basic feature test example.
      *
@@ -46,7 +55,7 @@ class EventsApiTest extends TestCase
     {
         $response = $this
             ->withHeader('Authorization', 'Bearer '. $this->getToken())
-            ->delete('api/v1/events/5');
+            ->delete('api/v1/events/1');
 
         $response->assertStatus(204);
     }
@@ -105,7 +114,7 @@ class EventsApiTest extends TestCase
             ->withHeader('Authorization', 'Bearer '.$this->getToken())
             ->post('api/v1/events',$formdata);
 
-        $response->assertStatus(500);
+        $response->assertStatus(201);
     }
 
     public function test_no_puede_crear_eventos_sin_nombre_especificado()

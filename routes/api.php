@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     )->name('api.logout');
     Route::apiResource('v1/answers', AnswerController::class);
     Route::apiResource('v1/events', EventController::class);
+    Route::apiResource('v1/forums', ForumController::class);
 });
 
 

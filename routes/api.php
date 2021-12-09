@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\v1\ForumController;
 use App\Http\Controllers\api\v1\AnswerController;
+use App\Http\Controllers\api\v1\LandmarkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('v1/answers', AnswerController::class);
     Route::apiResource('v1/events', EventController::class);
     Route::apiResource('v1/forums', ForumController::class);
+    Route::apiResource('v1/landmarks', LandmarkController::class);
 });
 
 

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ForumResource;
+use App\Http\Requests\ForumStoreRequest;
+
 
 class ForumController extends Controller
 {
@@ -27,7 +29,7 @@ class ForumController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ForumStoreRequest $request)
     {
         $forum = new Forum();
         $forum->fill($request->all());
@@ -58,7 +60,7 @@ class ForumController extends Controller
      * @param  \App\Models\Forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Forum $forum)
+    public function update(ForumStoreRequest $request, Forum $forum)
     {
         $forum ->update($request->all());
         return (new ForumResource($forum))

@@ -16,7 +16,7 @@ class ReportAnswersApiTest extends TestCase
      */
     public function setUp(): void{
         parent::setUp();
-        $this->artisan('migrate:refresh');
+        $this->artisan('migrate:fresh');
         $this->artisan('db:seed');
     }
 
@@ -62,6 +62,7 @@ class ReportAnswersApiTest extends TestCase
         $formdata =[
             'description'=> 'no me gusto esta pregunta',
             'answer_id' => 1,
+            'forum_id' => 1,
             'created_at'=>Carbon::now(),
             'updated_at'=>Carbon::now()
         ];

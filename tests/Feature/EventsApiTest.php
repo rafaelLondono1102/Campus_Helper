@@ -15,8 +15,8 @@ class EventsApiTest extends TestCase
 
     public function setUp(): void{
         parent::setUp();
-        $this->artisan('migrate:refresh --path=/database/migrations/2021_11_19_153826_create_events_table.php');
-        $this->artisan('db:seed --class=EventsSeeder');
+        $this->artisan('migrate:fresh');
+        $this->artisan('db:seed');
     } 
     /**
      * A basic feature test example.

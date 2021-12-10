@@ -12,8 +12,8 @@ class ReportForumsApiTest extends TestCase
 
     public function setUp(): void{
         parent::setUp();
-        $this->artisan('migrate:refresh --path=/database/migrations/2021_11_22_093843_create_reports_table.php');
-        $this->artisan('db:seed --class=ReportsForumsSeeder');
+        $this->artisan('migrate:fresh');
+        $this->artisan('db:seed');
     } 
     /**
      * A basic feature test example.

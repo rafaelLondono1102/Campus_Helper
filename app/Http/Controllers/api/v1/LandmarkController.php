@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\LandmarkResource;
 use App\Models\Landmark;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\LandmarkResource;
+use App\Http\Requests\api\v1\LandMarkStoreRequest;
 
 class LandmarkController extends Controller
 {
@@ -26,7 +27,7 @@ class LandmarkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LandMarkStoreRequest $request)
     {
         $landmark = new Landmark();
         $landmark->fill($request->all());
@@ -56,7 +57,7 @@ class LandmarkController extends Controller
      * @param  \App\Models\Landmark  $landmark
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Landmark $landmark)
+    public function update(LandMarkStoreRequest $request, Landmark $landmark)
     {
         $landmark->update($request->all());
         return (new LandmarkResource($landmark))

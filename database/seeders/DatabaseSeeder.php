@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(LandmarksSeeder::class);
         $this->call(ForumsSeeder::class);
-        $this->call(AnswerSeeder::class);
+        $this->call(AnswersSeeder::class);
+        $this->call(EventsSeeder::class);
+        $this->call(ReportsForumsSeeder::class);
+        $this->call(ReportsAnswersSeeder::class);
     }
 }

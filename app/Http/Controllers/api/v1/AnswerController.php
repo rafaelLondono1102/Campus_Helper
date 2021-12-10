@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AnswerResource;
+use App\Http\Requests\api\v1\AnswerStoreRequest;
 
 class AnswerController extends Controller
 {
@@ -27,7 +28,7 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AnswerStoreRequest $request)
     {
         $answer = new Answer();
         $answer->fill($request->all());
@@ -45,7 +46,7 @@ class AnswerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Answer $answer)
-    {
+    {   
         return (new AnswerResource($answer))
                 ->response()
                 ->setStatusCode(200);
@@ -58,7 +59,7 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(AnswerStoreRequest $request, Answer $answer)
     {
         $answer ->update($request->all());
         return (new AnswerResource($answer))

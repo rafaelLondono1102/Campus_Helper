@@ -13,21 +13,21 @@
                 </ul>
             </div>
         @endif
-        
+
         {{ Form::open(['route'=>'event.store','method'=>'post','files' => 'true']) }}
-            
+
             {{ Form::hidden('landmark_id', $landmark->id) }}
-          
-            
-          
+
+
+
             @include('eventos.form_fields')
-            
+
             <br>
-            
+
             {{Form::submit('Crear',['class'=>'btn btn-primary']);}}
             <a href="{{route('home')}}" class="btn btn-secondary">Cancelar</a>
-            
-            
+
+
 
         {!! Form::close()!!}
 
